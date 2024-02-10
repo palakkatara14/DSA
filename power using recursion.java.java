@@ -1,17 +1,26 @@
-
-
+import java.util.*;
 public class Main{
     public static void main(String[] args){
-        int a=2;
-        int b=3;
-        System.out.println(power(2,3));
+        Scanner sc=new Scanner(System.in);
+        int x=sc.nextInt();
+        int n=sc.nextInt();
+        System.out.println(printpow(x,n));
     }
-    public static int power(int a,int b){
-        if(b==0){
+    public static int printpow(int x,int n){
+        if(n==0){
             return 1;
         }
-       int sp=power(a,b-1);
-       int bp=sp*a;
-       return bp;
+        if(x==0){
+            return 0;
+        }
+        
+        int c=printpow(x,n-1);
+        int d=c*x;
+        return d;
+        
+        
+        
     }
+    
+    
 }
