@@ -72,7 +72,7 @@ public class LinkedList{
         return val;
         }
         
-    }
+    
     public static void main(String[] args){
         LinkedList ll=new LinkedList();
         ll.add_first(3);
@@ -81,7 +81,7 @@ public class LinkedList{
         ll.add_Last(1);
         ll.add(2,9);
         ll.print();
-        ll.removefirst();
+        ll.removefirst(2);
         ll.print();
         System.out.println("the size of linkedlist is: ");
         System.out.println(ll.size);
