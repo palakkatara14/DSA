@@ -1,0 +1,33 @@
+
+class Solution {
+    static int minJumps(int[] arr, int n) {
+       if(arr.length==1) return 0;
+        
+        if(arr[0]==0)  return -1;
+        
+        int maxReach=0;
+        int jumps=0;
+        int lastIndex=0;
+        int dest=n-1;
+        for(int i=0;i<n;i++){
+
+            maxReach=Math.max(maxReach,arr[i]+i);
+
+            if(i==lastIndex){
+                jumps++;
+                lastIndex=maxReach;
+            }
+            
+            if(lastIndex>=dest){
+                return jumps;
+
+            }
+            
+            if(i>maxReach) return -1;
+        }
+        return -1;
+        
+ 
+    
+    }
+}
