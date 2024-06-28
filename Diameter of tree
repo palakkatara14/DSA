@@ -1,0 +1,81 @@
+import java.util.*;
+
+public class Main{
+    
+    public static void main(String[] args) {
+         int[] arr={1,2,4,5,3,6};
+         
+         Node root = recurse(0,arr);
+        System.out.println(diameter2(root).diameter);
+
+    }    
+    
+    public static Node recurse(int i,int[] arr){
+        if(i>=arr.length || arr[i]==-1){
+            return null;
+        }
+        Node newNode=new Node(arr[i]);
+        newNode.left=recurse(2*i+1,arr);
+        newNode.right=recurse(2*i+2,arr);
+        
+        return newNode;
+    }//o(n^2)
+    /*
+    public static int height(Node curr){
+        if(curr==null){
+            return 0;
+        }
+        int leftHeight=height(curr.left);
+        int rightHeight=height(curr.right);
+         int totalHeight=Math.max(leftHeight,rightHeight);
+         return totalHeight+1;
+    }
+    public static int diameter(Node curr){
+        if(curr==null){
+            return 0;
+        }
+        int d1=diameter(curr.left);
+        int d2=diameter(curr.right);
+         int d3=height(curr.left)+height(curr.right)+1;
+         
+         return Math.max(d3,Math.max(d1,d2));
+    }*/
+    //o(n)
+    static class TreeInfo{
+        int ht;
+        int diameter;
+        TreeInfo(int ht,int diameter){
+            this.ht=ht;
+            this.diameter=diameter;
+        }
+    }
+    public static TreeInfo diameter2(Node curr){
+        if(curr==null){
+            return new TreeInfo(0,0);
+        }
+        
+        TreeInfo left=diameter2(curr.left);
+        TreeInfo right=diameter2(curr.right);
+        int myHeight=Math.max(left.ht,right.ht)+1;
+        int diameter1=left.diameter;
+        int diameter2=right.diameter;
+        int diameter3=left.ht+right.ht+1;
+        
+        int myDiameter=Math.max(Math.max(diameter1,diameter2),diameter3);
+        TreeInfo myInfo=new TreeInfo(myHeight,myDiameter);
+        return myInfo;
+        
+    }
+    static class Node{
+        int val;
+        Node left;
+        Node right;
+        public Node(int v){
+            val=v;
+            left=null;
+            right=null;
+        }
+        
+    }
+    
+}
