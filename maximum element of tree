@@ -1,0 +1,48 @@
+import java.util.*;
+
+public class Main{
+    
+    public static void main(String[] args) {
+         int[] arr={1,2,4,8,5,9,7};
+         
+         Node root = recurse(0,arr);
+        System.out.println(maxElement(root));
+
+    }    
+    
+    public static Node recurse(int i,int[] arr){
+        if(i>=arr.length || arr[i]==-1){
+            return null;
+        }
+        Node newNode=new Node(arr[i]);
+        newNode.left=recurse(2*i+1,arr);
+        newNode.right=recurse(2*i+2,arr);
+        
+        return newNode;
+        
+
+       
+    }
+    public static int maxElement(Node curr){
+        if(curr==null){
+            return 0;
+        }
+        int leftMax=maxElement(curr.left);
+        int rightMax=maxElement(curr.right);
+         int Max=Math.max(leftMax,rightMax);
+         int totalMaxElement=Math.max(Max,curr.val);
+         return totalMaxElement;
+    }
+    static class Node{
+        int val;
+        Node left;
+        Node right;
+        public Node(int v){
+            val=v;
+            left=null;
+            right=null;
+        }
+        
+    }
+    
+}
