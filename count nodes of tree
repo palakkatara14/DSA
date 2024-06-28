@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class Main{
+    
+    public static void main(String[] args) {
+         int[] arr={7,8,10,17,-1,5,6};
+         
+         Node root = recurse(0,arr);
+        System.out.println(count(root));
+
+    }    
+    
+    public static Node recurse(int i,int[] arr){
+        if(i>=arr.length || arr[i]==-1){
+            return null;
+        }
+        Node newNode=new Node(arr[i]);
+        newNode.left=recurse(2*i+1,arr);
+        newNode.right=recurse(2*i+2,arr);
+        
+        return newNode;
+        
+
+       
+    }
+    public static int count(Node curr){
+        if(curr==null){
+            return 0;
+        }
+        int leftNodes=count(curr.left);
+        int rightNodes=count(curr.right);
+        return leftNodes+rightNodes+1;
+    }
+    static class Node{
+        int val;
+        Node left;
+        Node right;
+        public Node(int v){
+            val=v;
+            left=null;
+            right=null;
+        }
+        
+    }
+    
+}
