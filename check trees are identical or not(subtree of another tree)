@@ -1,0 +1,54 @@
+import java.util.*;
+
+public class Main{
+    
+    public static void main(String[] args) {
+         int[] arr1={1,2,3,4,5,6};
+         int[] arr2={1,2,3,4,5,6};
+       
+         
+         Node root1 = recurse(0,arr1);
+         Node  root2=recurse(0,arr2);
+        System.out.println(checkIdentical(root1,root2));
+
+    }    
+    
+    public static Node recurse(int i,int[] arr){
+        if(i>=arr.length || arr[i]==-1){
+            return null;
+        }
+        Node newNode=new Node(arr[i]);
+        newNode.left=recurse(2*i+1,arr);
+        newNode.right=recurse(2*i+2,arr);
+        
+        return newNode;
+    }
+    public static boolean checkIdentical(Node curr1,Node curr2){
+        if(curr1==null && curr2==null){
+            return true;
+        }
+        if(curr1==null || curr2==null){
+            return false;
+        }
+        if(curr1.val==curr2.val){
+            return checkIdentical(curr1.left,curr2.left)&& checkIdentical(curr1.right,curr2.right);
+        }
+       
+       return false;
+        
+       
+    }
+    
+    static class Node{
+        int val;
+        Node left;
+        Node right;
+        public Node(int v){
+            val=v;
+            left=null;
+            right=null;
+        }
+        
+    }
+    
+}
