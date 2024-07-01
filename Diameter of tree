@@ -79,3 +79,55 @@ public class Main{
     }
     
 }
+//Leetcode approach
+class Solution {
+    /*public int diameterOfBinaryTree(TreeNode root) {
+        //brute force
+        if (root == null) {
+            return 0;
+        }
+        int left = diameterOfBinaryTree(root.left);
+        int right = diameterOfBinaryTree(root.right);
+
+        int leftsubTreeHeight = height(root.left);
+        int rightsubTreeHeight = height(root.right);
+
+        int curr = leftsubTreeHeight + rightsubTreeHeight;
+
+        return Math.max(curr, Math.max(left, right));
+    }
+
+    public int height(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int left = height(root.left);
+        int right = height(root.right);
+
+        return Math.max(left, right) + 1;
+    }*/
+    //optimum solution
+    class Pair{
+        int d;
+        int h;
+        public Pair(){
+              this.d=-1;
+              this.h=0;
+        }
+    }
+    public int diameterOfBinaryTree(TreeNode root){
+           Pair ans=maxDiameter(root);
+           return ans.d;
+    }
+    public Pair maxDiameter(TreeNode root){
+        if(root==null){
+            return new Pair();
+        }
+        Pair left=maxDiameter(root.left);
+        Pair right=maxDiameter(root.right);
+        Pair curr=new Pair();
+        curr.h=Math.max(left.h,right.h)+1;
+        curr.d=Math.max(left.h+right.h ,Math.max(left.d,right.d));
+        return curr;
+    }
+}
