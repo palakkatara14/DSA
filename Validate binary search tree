@@ -1,0 +1,114 @@
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        if(root==null){
+            return true;
+        }
+        TreeNode leftSubTreeMax=maxNode(root.left);
+        TreeNode rightSubTreeMin=minNode(root.right);
+
+        if(leftSubTreeMax !=null  && leftSubTreeMax.val >= root.val){
+            return false;
+        }
+        if(rightSubTreeMin !=null && rightSubTreeMin.val <= root.val){
+            return false; 
+        }
+        boolean left = isValidBST(root.left);
+        boolean right=isValidBST(root.right);
+
+        return left && right;       
+    }
+    private TreeNode maxNode(TreeNode root){
+        if(root==null){
+            return null;
+
+        }
+        TreeNode left=maxNode(root.left);
+        TreeNode right=maxNode(root.right);
+
+        if(left==null && right==null){
+            return root;
+        }
+        if(left==null){
+            if(root.val>right.val){
+                return root;
+            }
+            else{
+                return right;
+
+            }
+        }
+        else if(right==null){
+            if(root.val>left.val){
+                return root;
+            }
+            else{
+                return left;
+            }
+        }
+        else{
+            TreeNode temp=root;
+            if(right.val > temp.val){
+                temp=right;
+            }
+            if(left.val >temp.val){
+                temp=left;
+            }
+            return temp;
+        }
+    }
+    private TreeNode minNode(TreeNode root){
+        if(root==null){
+            return null;
+
+        }
+        TreeNode left=minNode(root.left);
+        TreeNode right=minNode(root.right);
+
+        if(left==null && right==null){
+            return root;
+        }
+        if(left==null){
+            if(root.val<right.val){
+                return root;
+            }
+            else{
+                return right;
+
+            }
+        }
+        else if(right==null){
+            if(root.val<left.val){
+                return root;
+            }
+            else{
+                return left;
+            }
+        }
+        else{
+            TreeNode temp=root;
+            if(right.val < temp.val){
+                temp=right;
+            }
+            if(left.val < temp.val){
+                temp=left;
+            }
+            return temp;
+        }
+    }
+}
