@@ -1,0 +1,15 @@
+import java.util.*;
+public class Main{
+    public static void main(String[] args){
+       //country(key),population(value)
+       //in a ordered way;
+        LinkedHashMap<String,Integer> map=new LinkedHashMap<>();
+        map.put("Tata",50);
+        map.put("Tesla",120);
+        
+        
+        for(String key:map.keySet()){
+            System.out.println("key-> " + key+ "value-> "+map.get(key));
+        }
+    }
+}
