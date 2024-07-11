@@ -22,7 +22,9 @@ public class Main{
         }
         System.out.println(map.get("China"));//key exist;
         System.out.println(map.get("Indonesia"));//null
-        
+        for(String key:map.keySet()){
+            System.out.println("key-> " + key+ "value-> "+map.get(key));
+        }
         
         
         //iteration in HashMap
